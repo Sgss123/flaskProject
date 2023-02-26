@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block content %}
+<form methods="POST">
+    <div class="mb-3">
+        <label for="InputEmail" class="form-label">邮箱地址</label>
+        <input type="email" class="form-control" id="InputEmail" aria-describedby="emailHelp">
+        <div id="emailHelp" class="form-text">我们不会将您的电子邮箱共享到任何地方。</div>
+    </div>
+    <div class="mb-3">
+        <label for="InputUsername" class="form-label">用户名</label>
+        <input type="text" class="form-control" id="InputUsername">
+    </div>
+    <div class="mb-3">
+        <label for="InputPassword" class="form-label">密码</label>
+        <input type="password" class="form-control" id="InputPassword">
+    </div>
+    <div class="mb-3 form-check">
+        <input type="checkbox" class="form-check-input" id="exampleCheck1">
+        <label class="form-check-label" for="exampleCheck1">记住密码</label>
+    </div>
+    <button type="submit" class="btn btn-primary">登录</button>
+</form>
+{% endblock %}

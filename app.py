@@ -18,18 +18,39 @@ app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False  # 关闭对模型修改的
 # 在扩展类实例化前加载配置
 db = SQLAlchemy(app)
 
+
 @app.route("/")
 def hello_world():  # put application's code here
     return render_template("homepage.html", type="首页", name=name)
 
+@app.route("/chat")
+def chat():
+    return render_template("chat.html",type="匿名对话", name=name, NoName=True)
 
 @app.route("/friend", methods=["GET", "POST"])
 def index():
-    if request.methods == "POST":
-        return "<h1>Hello World</h1>"
-    return render_template(
-        "friend.html", type="申请友情链接", name=name, id=randint(1, 6553625565)
-    )
+    if request.method == "POST":
+        email = request.form.get("InputEmail")
+        usn = request.form.get("InputUsername")
+        pwd = request.form.get("InputPassword")
+        if (
+            not email
+            or not usn
+            or not pwd
+            or email.find("@") == -1
+            or len(usn) > 20
+            or len(pwd) < 4
+        ):
+            flash("Invalid input.")  # 显示错误提示
+            return redirect(url_for("friend"))  # 重定向回主页
+        USERInfo = User(email=email, name=usn, pwd=pwd)  # 创建记录
+        db.session.add(USERInfo)  # 添加到数据库会话
+        db.session.commit()
+        return render_template(
+            "chat.html", type="对话", name=name, id=randint(1, 6553625565), nickname=usn
+        )
+    USERInfo = User.query.all()
+    return render_template("friend.html", type="申请友情链接", name=name)
 
 
 @app.errorhandler(404)  # 传入要处理的错误代码
@@ -43,8 +64,9 @@ if __name__ == "__main__":
 
 name = "Sgss"
 
+
 class User(db.Model):  # 表名将会是 user（自动生成，小写处理）
     id = db.Column(db.Integer, primary_key=True)  # 主键
     name = db.Column(db.String(20))  # 名字
-    email = db.Column(db.String (40))
+    email = db.Column(db.String(40))
     pwd = db.Column(db.Text)

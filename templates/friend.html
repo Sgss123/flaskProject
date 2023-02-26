@@ -1,23 +1,41 @@
 {% extends 'base.html' %}
+{% block head %}
+<style>
+    .info{
+        text-align: center;
+    }
+    .reg {
+        margin: auto;
+        padding: 4px;
+        width: 500px;
+        border: 2px solid gray;
+        border-radius: 4px;
+    }
+</style>
+{% endblock %}
 {% block content %}
-<form methods="POST">
-    <div class="mb-3">
-        <label for="InputEmail" class="form-label">邮箱地址</label>
-        <input type="email" class="form-control" id="InputEmail" aria-describedby="emailHelp">
-        <div id="emailHelp" class="form-text">我们不会将您的电子邮箱共享到任何地方。</div>
-    </div>
-    <div class="mb-3">
-        <label for="InputUsername" class="form-label">用户名</label>
-        <input type="text" class="form-control" id="InputUsername">
-    </div>
-    <div class="mb-3">
-        <label for="InputPassword" class="form-label">密码</label>
-        <input type="password" class="form-control" id="InputPassword">
-    </div>
-    <div class="mb-3 form-check">
-        <input type="checkbox" class="form-check-input" id="exampleCheck1">
-        <label class="form-check-label" for="exampleCheck1">记住密码</label>
-    </div>
-    <button type="submit" class="btn btn-primary">登录</button>
-</form>
+<div class="info">
+    <h1>在联系之前，请先注册一个网站账户</h1>
+</div>
+<div class="reg">
+    <form method="post">
+        <div class="mb-3">
+            <label for="InputEmail" class="form-label">邮箱地址</label>
+            <input type="email" class="form-control" name="InputEmail" id="InputEmail" aria-describedby="emailHelp">
+            <div id="emailHelp" class="form-text">我们不会将您的电子邮箱共享到任何地方。</div>
+        </div>
+        <div class="mb-3">
+            <label for="InputUsername" class="form-label">用户名</label>
+            <input type="text" class="form-control" name="InputUsername" id="InputUsername">
+        </div>
+        <div class="mb-3">
+            <label for="InputPassword" class="form-label">密码</label>
+            <input type="password" class="form-control" name="InputPassword" id="InputPassword">
+        </div>
+        <div class="mb-3 form-check">
+            匿名访问？<a href="{{ url_for('chat') }}">点我</a>
+        </div>
+        <button type="submit" class="btn btn-primary">注册</button>
+    </form>
+</div>
 {% endblock %}

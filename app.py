@@ -23,9 +23,23 @@ db = SQLAlchemy(app)
 def hello_world():  # put application's code here
     return render_template("homepage.html", type="首页", name=name)
 
+
+@app.route("/signup")
+@app.route("/reg")
+def reg():
+    return render_template("reg.htm", type="注册", name=name)
+
+
+@app.route("/signin")
+@app.route("/login")
+def login():
+    return render_template("log.htm", type="登录", name=name)
+
+
 @app.route("/chat")
 def chat():
-    return render_template("chat.html",type="匿名对话", name=name, NoName=True)
+    return render_template("chat.html", type="匿名对话", name=name, NoName=True)
+
 
 @app.route("/friend", methods=["GET", "POST"])
 def index():

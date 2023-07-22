@@ -1,11 +1,9 @@
 {% extends 'base.html' %}
 {% block content %}
 {% if NoName %}
-<iframe sandbox="allow-same-origin allow-scripts allow-popups allow-forms"
-    src="//chatbot.weixin.qq.com/webapp/auth/zTyTOumwsfnMvdH6cTR0wTsicm4h30?openid={{ id }}&nickname={{ nickname }}&robotName=%E5%B0%8F%E6%AE%87"
-    class="window" style="width: 100%;height: 800px;"></iframe>
+
 {% else %}
-<iframe src="//chatbot.weixin.qq.com/webapp/zTyTOumwsfnMvdH6cTR0wTsicm4h30?robotName=%E5%B0%8F%E6%AE%87" class="window" style="width: 100%;height: 800px;"></iframe>
+
 {% endif %}
     <div style="text-align: center;"><h2>请直接发送“联系站长”</h2><small>请勿随便刷新页面，以防信息丢失！</small></div>
 {% endblock %}
